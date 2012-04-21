@@ -1,7 +1,10 @@
 <?php
 
+/**
+ * @filesource /protected/views/201204/site/index.php
+ */
 $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-    'name' => 'city',
+    'name' => 'user',
     'sourceUrl' => $this->createUrl('lookup'),
     'options' => array(
 	'minLength' => '2',
