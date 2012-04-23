@@ -17,18 +17,17 @@ class SiteController extends Controller {
 	 */
 	public function actionLookup() {
 		$term = $_GET['term'];
-		$data = array(
-		    'Arya Stark',
-		    'Cersei Lannister',
-		    'Daenarys Targaryen',
-		    'Robb Stark',
-		    'Bran Stark',
-		    'Rickard Karstark',
-		    'Tyrion Lannister',
-		);
-		$return = array_values(array_filter($data, function($element) use ($term) {
-					return (stripos($element, $term) !== false);
-				}));
+		$users = User::model()->findAll(array(
+		    'condition' => 'firstName LIKE :firstName OR lastName LIKE :lastName',
+		    'params' => array(
+			':firstName' => "%$term%",
+			':lastName' => "%$term%",
+		    ),
+			));
+		$return = array();
+		foreach ($users as $user) {
+			$return[] = $user->firstName . ' ' . $user->lastName;
+		}
 		echo CJSON::encode($return);
 	}
 
