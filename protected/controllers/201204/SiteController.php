@@ -26,7 +26,12 @@ class SiteController extends Controller {
 			));
 		$return = array();
 		foreach ($users as $user) {
-			$return[] = $user->firstName . ' ' . $user->lastName;
+			$return[] = array(
+			    'label' => $user->firstName . ' ' . $user->lastName,
+			    'value' => $user->id,
+			    'image' => $user->profilePicturePath,
+			    'city' => $user->city,
+			);
 		}
 		echo CJSON::encode($return);
 	}

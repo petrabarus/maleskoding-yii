@@ -63,4 +63,11 @@ class User extends CActiveRecord {
 		);
 	}
 
+	/**
+	 * @return string profile picture path.
+	 */
+	public function getProfilePicturePath() {
+		return '/images/' . $this->id . '.jpg';
+	}
+
 }
