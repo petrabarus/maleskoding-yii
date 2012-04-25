@@ -1,16 +1,43 @@
-<?php $this->pageTitle=Yii::app()->name; ?>
+<?php
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+/**
+ * @filesource /protected/views/201204/site/index.php
+ */
+$autoCompleteId = 'userautocomplete';
+$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+    'id' => $autoCompleteId,
+    'name' => 'user',
+    'sourceUrl' => $this->createUrl('lookup'),
+    'options' => array(
+	'minLength' => '2',
+	'select' => <<<EOJS
+js:function(event, ui){
+	window.location.href = ui.item.url;
+}
+EOJS
+    ,
+    ),
+    'htmlOptions' => array(
+	'style' => 'height:20px;'
+    ),
+));
 
-<p>Congratulations! You have successfully created your Yii application.</p>
+Yii::app()->clientScript->registerScript('userAutoComplete', <<<EOJS
+jQuery('#$autoCompleteId').data('autocomplete')._renderItem = function( ul, item ) {
+	return $('<li></li>')
+		.data('item.autocomplete', item)
+		.append('<a href=\'http://example.com\' class=\'userautocompletelink\'><img src=\''+item.image+'\'/><h1>'+item.label+'</h1><h2>'+item.city+'</h2></a>')
+		.appendTo(ul);
+};
 
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <tt><?php echo __FILE__; ?></tt></li>
-	<li>Layout file: <tt><?php echo $this->getLayoutFile('main'); ?></tt></li>
-</ul>
+EOJS
+	, CClientScript::POS_READY);
 
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
+Yii::app()->clientScript->registerCss('userAutoComplete', <<<EOCSS
+        .userautocompletelink {height:52px;}
+	.userautocompletelink img {float:left;margin-right:5px;}
+	.userautocompletelink h1 {font-size:15px;padding:0px;margin:0px;font-width:bold;}
+	.userautocompletelink h2 {font-size:12px;padding:0px;margin:0px;}
+EOCSS
+);
+?>
