@@ -8,6 +8,8 @@
  * @property string $firstName
  * @property string $lastName
  * @property string $city
+ * //
+ * @property string $fullName
  */
 class User extends CActiveRecord {
 
@@ -68,6 +70,20 @@ class User extends CActiveRecord {
 	 */
 	public function getProfilePicturePath() {
 		return '/images/' . $this->id . '.jpg';
+	}
+
+	/**
+	 * @return string profile page.
+	 */
+	public function getProfilePage() {
+		return CHtml::normalizeUrl(array('/user/view', 'id' => $this->id));
+	}
+
+	/**
+	 * @return string full name of the user.
+	 */
+	public function getFullName() {
+		return $this->firstName . ' ' . $this->lastName;
 	}
 
 }
