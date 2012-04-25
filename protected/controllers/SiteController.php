@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @filesource /protected/controllers/201204/SiteController.php
+ * @filesource /protected/controllers/SiteController.php
  */
 class SiteController extends Controller {
 

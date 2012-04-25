@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @filesource /protected/views/201204/site/index.php
+ * @filesource /protected/views/site/index.php
  */
 $autoCompleteId = 'userautocomplete';
 $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
