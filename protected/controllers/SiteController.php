@@ -29,7 +29,16 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		$dataProvider = new CActiveDataProvider('ModelA', array(
+			'criteria' => array(
+				'with' => array(
+					'modelC',
+				)
+			)
+		));
+		$this->render('index', array(
+			'dataProvider' => $dataProvider,
+		));
 	}
 
 	/**
