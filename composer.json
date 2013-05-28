@@ -1,0 +1,8 @@
+{
+  "config": {
+    "vendor-dir": "protected/composer/vendors"
+  },
+  "require": {
+    "aws/aws-sdk-php": "2.3.*@dev"
+  }
+}

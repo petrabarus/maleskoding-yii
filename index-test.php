@@ -3,7 +3,7 @@
  * This is the bootstrap file for test application.
  * This file should be removed when the application is deployed for production.
  */
-
+require_once(dirname(__FILE__).'/protected/composer/vendors/autoload.php');
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/yii/framework/yii.php';
 $config=dirname(__FILE__).'/protected/config/test.php';

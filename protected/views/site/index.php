@@ -1,16 +1,17 @@
-<?php $this->pageTitle=Yii::app()->name; ?>
+<h1>Upload file</h1>
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+<?php if (Yii::app()->user->hasFlash('Success')): ?>
+    <div class="flash-success">
+        <?php echo Yii::app()->user->getFlash('Success'); ?>
+    </div>
+<?php endif; ?>
+<?php if (Yii::app()->user->hasFlash('Failed')): ?>
+    <div class="flash-error">
+        <?php echo Yii::app()->user->getFlash('Success'); ?>
+    </div>
+<?php endif; ?>
 
-<p>Congratulations! You have successfully created your Yii application.</p>
-
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <tt><?php echo __FILE__; ?></tt></li>
-	<li>Layout file: <tt><?php echo $this->getLayoutFile('main'); ?></tt></li>
-</ul>
-
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
+<?php echo CHtml::beginForm('', 'post', array('enctype' => 'multipart/form-data')); ?>
+<?php echo CHtml::fileField('file'); ?>
+<?php echo CHtml::submitButton(); ?>
+<?php echo CHtml::endForm(); ?>
